@@ -1,9 +1,11 @@
 <template>
-  <el-carousel class="container" :interval="5000" arrow="always">
-    <el-carousel-item class="container" v-for="(item,index) in imgList" :key="index">
-      <img v-bind:src="item.url" alt="">
-    </el-carousel-item>
-  </el-carousel>
+  <div class="Homecontainer">
+    <el-carousel :interval="5000" arrow="always">
+      <el-carousel-item v-for="(item,index) in imgList" :key="index">
+        <img v-bind:src="item.url" alt="">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
 </template>
 
 <script>
@@ -23,24 +25,26 @@ export default{
   },
   methods: {
     setSize () {
-      //this.carouselHeight = 400 / 1920 * this.screenWidth
+      this.carouselHeight = 400 / 1920 * this.screenWidth
     }
   },
   mounted () {
-    //this.screenWidth = window.innerWidth
-    //this.setSize()
+    console.log(window.innerHeight)
+    console.log(window.innerWidth)
+    this.screenWidth = window.innerWidth
+    this.setSize()
     window.onresize = () => {
-      //this.screenWidth = window.innerWidth
-      //this.setSize()
+      this.screenWidth = window.innerWidth
+      this.setSize()
     }
   }
 }
 </script>
 
 <style scoped>
-  .container{
-    height: 10%;
-    width: 10%;
+  .Homecontainer{
+    height: 100%;
+    width: 100%;
   }
   img{
     width: auto;
@@ -48,5 +52,10 @@ export default{
   }
   .el-carousel__item:nth-child(n) {
     background-color: #99a9bf;
+    color: #475669;
+    font-size: 18px;
+    opacity: 0.75;
+    line-height: 300px;
+    margin: 0;
   }
 </style>

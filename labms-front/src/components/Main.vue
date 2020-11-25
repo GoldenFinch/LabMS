@@ -3,6 +3,7 @@
     <el-menu
             :default-active="activeIndex"
             mode="horizontal"
+            class="menuclass"
             @select="MainMenuSelect"
             background-color="#2E2F34"
             text-color="#b69779"
@@ -101,9 +102,13 @@ export default {
     display: flex;
     flex-direction: column;
   }
+  .menuclass{
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
   .content{
-    background-color: #2E2F34;
     flex: auto;
+    margin-top: -1px;
   }
   #logo{
     display: flex;
