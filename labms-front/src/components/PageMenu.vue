@@ -34,8 +34,8 @@ export default {
   methods: {
     VerticalMenuSelect (key) {
       if (key === '1') {
-        if (this.$route.path !== '/menu/individule') {
-          this.$router.push('/menu/individule')
+        if (this.$route.path !== '/menu/example') {
+          this.$router.push('/menu/example')
         }
       } else if (key === '2') {
         if (this.$route.path !== '/menu/team') {
@@ -45,7 +45,7 @@ export default {
     }
   },
   mounted () {
-    if (this.$route.path === '/menu/individual') {
+    if (this.$route.path === '/menu/example') {
       this.activeIndex = '1'
     } else if (this.$route.path === '/menu/team') {
       this.activeIndex = '2'
@@ -71,5 +71,6 @@ export default {
   }
   .Menucontent{
     height: 100%;
+    width: 100%;
   }
 </style>

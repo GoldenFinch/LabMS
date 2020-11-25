@@ -1,6 +1,6 @@
 <template>
   <div class="Homecontainer">
-    <el-carousel :interval="5000" arrow="always">
+    <el-carousel :interval="5000" arrow="always" :height="carouselHeight">
       <el-carousel-item v-for="(item,index) in imgList" :key="index">
         <img v-bind:src="item.url" alt="">
       </el-carousel-item>
@@ -13,7 +13,7 @@ export default{
   name: 'PageHome',
   data () {
     return {
-      carouselHeight: 2000,
+      carouselHeight: '800px',
       screenWidth: 0,
       imgList: [
         {url: require('../assets/carousel1.png')},
@@ -25,17 +25,17 @@ export default{
   },
   methods: {
     setSize () {
-      this.carouselHeight = 400 / 1920 * this.screenWidth
+      this.carouselHeight = 533 / 800 * this.screenWidth
     }
   },
   mounted () {
-    console.log(window.innerHeight)
     console.log(window.innerWidth)
+    console.log(window.innerHeight)
     this.screenWidth = window.innerWidth
-    this.setSize()
+    //this.setSize()
     window.onresize = () => {
       this.screenWidth = window.innerWidth
-      this.setSize()
+      //this.setSize()
     }
   }
 }
@@ -52,10 +52,5 @@ export default{
   }
   .el-carousel__item:nth-child(n) {
     background-color: #99a9bf;
-    color: #475669;
-    font-size: 18px;
-    opacity: 0.75;
-    line-height: 300px;
-    margin: 0;
   }
 </style>

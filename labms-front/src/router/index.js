@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Main from '@/components/Main'
 import PageHome from '@/components/PageHome'
 import PageMenu from '@/components/PageMenu'
+import MenuExample from '@/components/MenuExample'
 
 Vue.use(Router)
 
@@ -20,7 +21,13 @@ export default new Router({
                 },
                 {
                     path: 'menu',
-                    component: PageMenu
+                    component: PageMenu,
+                    children: [
+                        {
+                            path: 'example',
+                            component: MenuExample
+                        }
+                    ]
                 }
             ]
         },
