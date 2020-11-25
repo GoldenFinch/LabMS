@@ -1,0 +1,75 @@
+<template>
+  <div class="Menucontainer">
+    <el-menu
+      :default-active="activeIndex"
+      class="el-menu-vertical-demo"
+      :collapse="isCollapse"
+      @select="VerticalMenuSelect"
+      background-color="#2E2F34"
+      text-color="#b69779"
+      active-text-color="#f6ca9d">
+      <el-menu-item index="1">
+        <i class="el-icon-user-solid"></i>
+        <span slot="title">个人中心</span>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <i class="el-icon-coordinate"></i>
+        <span slot="title">团队</span>
+      </el-menu-item>
+    </el-menu>
+    <div class="Menucontent">
+      <router-view v-bind:left="left"></router-view>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['isCollapse', 'left'],
+  data () {
+    return {
+      activeIndex: '100'
+    }
+  },
+  methods: {
+    VerticalMenuSelect (key) {
+      if (key === '1') {
+        if (this.$route.path !== '/menu/individule') {
+          this.$router.push('/menu/individule')
+        }
+      } else if (key === '2') {
+        if (this.$route.path !== '/menu/team') {
+          this.$router.push('/menu/team')
+        }
+      }
+    }
+  },
+  mounted () {
+    if (this.$route.path === '/menu/individual') {
+      this.activeIndex = '1'
+    } else if (this.$route.path === '/menu/team') {
+      this.activeIndex = '2'
+    }
+  }
+}
+</script>
+
+<style scoped>
+  .Menucontainer{
+    width: 100%;
+    height: 100%;
+  }
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    float: left;
+    width: 150px;
+    min-height: 100%;
+  }
+  .el-menu-vertical-demo {
+    float: left;
+    width: 50px;
+    min-height: 100%;
+  }
+  .Menucontent{
+    height: 100%;
+  }
+</style>
