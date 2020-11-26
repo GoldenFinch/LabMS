@@ -17,7 +17,7 @@
       <el-menu-item index="1"><i class="el-icon-s-home" style="color: #b69779;padding-bottom: 4px;"></i>主页</el-menu-item>
       <el-menu-item index="2"><i class="el-icon-s-grid" style="color: #b69779;padding-bottom: 4px;"></i>菜单</el-menu-item>
       <div id="menuuser">
-        <router-link to="login" v-if="cookiesname" style="color:#b69779">登录</router-link>
+        <router-link to="/login" v-if="cookiesname" style="color:#b69779">登录</router-link>
         <p v-if="!cookiesname" style="color: #b69779;cursor: pointer" @click="signout()">欢迎您,{{this.$cookies.get('private').name}},点击退出</p>
       </div>
     </el-menu>
