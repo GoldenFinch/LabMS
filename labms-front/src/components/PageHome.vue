@@ -1,10 +1,9 @@
 <template>
   <div class="Homecontainer">
-    <el-carousel :interval="5000" arrow="always" :height="carouselHeight">
-      <el-carousel-item v-for="(item,index) in imgList" :key="index">
-        <img v-bind:src="item.url" alt="">
-      </el-carousel-item>
-    </el-carousel>
+    <img class="img1" id="img1" v-bind:src="imgList[0].url" alt="">
+    <img class="img2" id="img2" v-bind:src="imgList[1].url" alt="">
+    <img class="img3" v-bind:src="imgList[2].url" alt="">
+    <img class="img4" v-bind:src="imgList[3].url" alt="">
   </div>
 </template>
 
@@ -13,8 +12,6 @@ export default{
   name: 'PageHome',
   data () {
     return {
-      carouselHeight: '800px',
-      screenWidth: 0,
       imgList: [
         {url: require('../assets/carousel1.png')},
         {url: require('../assets/carousel2.png')},
@@ -24,18 +21,16 @@ export default{
     }
   },
   methods: {
-    setSize () {
-      this.carouselHeight = 533 / 800 * this.screenWidth
-    }
   },
   mounted () {
-    console.log(window.innerWidth)
-    console.log(window.innerHeight)
-    this.screenWidth = window.innerWidth
-    //this.setSize()
-    window.onresize = () => {
-      this.screenWidth = window.innerWidth
-      //this.setSize()
+    setTimeout(() => {
+      document.getElementById("img1").style.opacity=1
+    }, 500)
+    window.onscroll = function () {
+      console.log(document.documentElement.scrollTop)
+      if (document.documentElement.scrollTop > 700){
+        document.getElementById("img2").style.left="0px"
+      }
     }
   }
 }
@@ -45,10 +40,32 @@ export default{
   .Homecontainer{
     height: 100%;
     width: 100%;
+    display: flex;
+    flex-direction: column;
   }
   img{
-    width: auto;
-    height: inherit;
+    width: 68%;
+    margin-left: 16%;
+    margin-right: 16%;
+  }
+  .img1{
+    position: absolute;
+    opacity: 0;
+    transition-duration: 2000ms;
+  }
+  .img2{
+    position: absolute;
+    top: 1000px;
+    left: -100%;
+    transition-duration: 500ms;
+  }
+  .img3{
+    position: absolute;
+    top: 1900px;
+  }
+  .img4{
+    position: absolute;
+    top: 2800px;
   }
   .el-carousel__item:nth-child(n) {
     background-color: #99a9bf;

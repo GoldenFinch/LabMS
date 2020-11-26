@@ -14,6 +14,7 @@ export default new Router({
         {
             path: '/',
             component: Main,
+            redirect: 'home',
             children: [
                 {
                     path: 'home',
@@ -22,6 +23,7 @@ export default new Router({
                 {
                     path: 'menu',
                     component: PageMenu,
+                    redirect: 'menu/example',
                     children: [
                         {
                             path: 'example',

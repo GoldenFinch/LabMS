@@ -1,11 +1,13 @@
 <template>
-  <div class="layoutteam" :style="{left: left}">
+  <div class="Examplecontainer" :style="{left: left}">
+    <div class="layoutExample">
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MenuTeam',
+  name: 'MenuExample',
   props: ['left'],
   data () {
     return {
@@ -19,14 +21,13 @@ export default {
 </script>
 
 <style scoped>
-  .layoutteam{
+  .Examplecontainer{
+    height: 100%;
+    width: 100%;
+  }
+  .layoutExample{
+    height: 100%;
     border: 1px solid #d7dde4;
-    height: 99%;
-    left: 50px;
-    right: 10px;
-    margin-left: 15px;
-    background: #f5f7f9;
-    color: black;
     transition-duration: 400ms;
     overflow-x: hidden;
     display: flex;

@@ -8,13 +8,13 @@
       background-color="#2E2F34"
       text-color="#b69779"
       active-text-color="#f6ca9d">
-      <el-menu-item index="1">
+      <el-menu-item index="0">
         <i class="el-icon-user-solid"></i>
-        <span slot="title">个人中心</span>
+        <span slot="title">示例</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="1">
         <i class="el-icon-coordinate"></i>
-        <span slot="title">团队</span>
+        <span slot="title"></span>
       </el-menu-item>
     </el-menu>
     <div class="Menucontent">
@@ -33,22 +33,22 @@ export default {
   },
   methods: {
     VerticalMenuSelect (key) {
-      if (key === '1') {
+      if (key === '0') {
         if (this.$route.path !== '/menu/example') {
           this.$router.push('/menu/example')
         }
-      } else if (key === '2') {
-        if (this.$route.path !== '/menu/team') {
-          this.$router.push('/menu/team')
+      } else if (key === '1') {
+        if (this.$route.path !== '/menu/') {
+          this.$router.push('')
         }
       }
     }
   },
   mounted () {
     if (this.$route.path === '/menu/example') {
+      this.activeIndex = '0'
+    } else if (this.$route.path === '/menu/') {
       this.activeIndex = '1'
-    } else if (this.$route.path === '/menu/team') {
-      this.activeIndex = '2'
     }
   }
 }
