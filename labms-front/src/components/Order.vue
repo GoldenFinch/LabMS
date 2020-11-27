@@ -1,13 +1,19 @@
 <template>
   <div class="Ordercontainer" :style="{left: left}">
-    <div class="layoutOrder">这是实验开放平台
+    <div class="layoutOrder">
+      <el-menu :default-active="activeIndex2" class="el-menu-demo" mode="horizontal"
+      @select="handleSelect" active-text-color="#f6ca9d">
+        <el-menu-item index="1">实验室预约</el-menu-item>
+        <el-menu-item index="2">我的中心</el-menu-item>
+      </el-menu>
+      <div class="line"></div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MenuExample',
+  name: 'Order',
   props: ['left'],
   data () {
     return {
@@ -32,5 +38,6 @@ export default {
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    color:black
   }
 </style>
