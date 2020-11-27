@@ -1,6 +1,6 @@
 <template>
-  <div class="Examplecontainer" :style="{left: left}">
-    <div class="layoutExample">这是实验开放平台
+  <div class="Ordercontainer" :style="{left: left}">
+    <div class="layoutOrder">这是实验开放平台
     </div>
   </div>
 </template>
@@ -21,11 +21,11 @@ export default {
 </script>
 
 <style scoped>
-  .Examplecontainer{
+  .Ordercontainer{
     height: 100%;
     width: 100%;
   }
-  .layoutExample{
+  .layoutOrder{
     height: 100%;
     border: 1px solid #d7dde4;
     transition-duration: 400ms;
