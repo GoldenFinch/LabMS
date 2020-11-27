@@ -9,12 +9,24 @@
       text-color="#b69779"
       active-text-color="#f6ca9d">
       <el-menu-item index="0">
-        <i class="el-icon-user-solid"></i>
-        <span slot="title">示例</span>
+        <i class="el-icon-school"></i>
+        <span slot="title">实验教学中心</span>
       </el-menu-item>
       <el-menu-item index="1">
-        <i class="el-icon-coordinate"></i>
-        <span slot="title"></span>
+        <i class="el-icon-s-platform"></i>
+        <span slot="title">实验开放平台</span>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <i class="el-icon-s-release"></i>
+        <span slot="title">仪器设备管理</span>
+      </el-menu-item>
+      <el-menu-item index="3">
+        <i class="el-icon-s-claim"></i>
+        <span slot="title">低值品与耗材</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <i class="el-icon-s-finance"></i>
+        <span slot="title">项目与采购</span>
       </el-menu-item>
     </el-menu>
     <div class="Menucontent">
@@ -34,18 +46,22 @@ export default {
   methods: {
     VerticalMenuSelect (key) {
       if (key === '0') {
-        if (this.$route.path !== '/menu/example') {
-          this.$router.push('/menu/example')
+        if (this.$route.path !== '/menu/teach') {
+          this.$router.push('/menu/teach')
         }
       } else if (key === '1') {
-        if (this.$route.path !== '/menu/') {
-          this.$router.push('')
+        if (this.$route.path !== '/menu/order') {
+          this.$router.push('/menu/order')
+        }
+      }else if(key==='2'){
+        if(this.$route.path!=='/menu/equipment'){
+          this.$router.push('/menu/equipment')
         }
       }
     }
   },
   mounted () {
-    if (this.$route.path === '/menu/example') {
+    if (this.$route.path === '/menu/teach') {
       this.activeIndex = '0'
     } else if (this.$route.path === '/menu/') {
       this.activeIndex = '1'

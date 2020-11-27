@@ -1,6 +1,6 @@
 <template>
   <div class="Examplecontainer" :style="{left: left}">
-    <div class="layoutExample">
+    <div class="layoutExample">这是实验开放平台
     </div>
   </div>
 </template>
