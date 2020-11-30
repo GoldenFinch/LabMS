@@ -35,8 +35,8 @@
     :cell-style="{'text-align':'center'}">
         <el-table-column prop="date" label="日期" width="200" sortable> </el-table-column>
         <el-table-column prop="labname" label="实验室名称" width="400" sortable> </el-table-column>
-        <el-table-column prop="totalseat" label="座位总量" width="200" sortable> </el-table-column>
-        <el-table-column prop="remainseat" label="座位剩余量" width="200" sortable> </el-table-column>
+        <el-table-column prop="totalseat" label="座位总量" width="150" sortable> </el-table-column>
+        <el-table-column prop="remainseat" label="座位剩余量" width="150" sortable> </el-table-column>
         <el-table-column label="操作" width="200">
         <template slot-scope="scope">
             <el-button @click="handleClick(scope.row)" type="text" size="small">预约选座</el-button>

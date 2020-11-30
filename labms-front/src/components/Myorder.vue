@@ -10,8 +10,8 @@
         :cell-style="{'text-align':'center'}">
             <el-table-column prop="orderid" label="预约号" width="150" sortable> </el-table-column>
             <el-table-column prop="labname" label="预约空间" width="300" sortable> </el-table-column>
-            <el-table-column prop="starttime" label="开始时间" width="200" sortable> </el-table-column>
-            <el-table-column prop="endtime" label="结束时间" width="200" sortable> </el-table-column>
+            <el-table-column prop="starttime" label="开始时间" width="150" sortable> </el-table-column>
+            <el-table-column prop="endtime" label="结束时间" width="150" sortable> </el-table-column>
             <el-table-column prop="status" label="当前状态" width="100" sortable> </el-table-column>
             <el-table-column label="操作" width="300">
             <template slot-scope="scope">
