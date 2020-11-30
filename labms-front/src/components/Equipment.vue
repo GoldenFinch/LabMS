@@ -1,8 +1,7 @@
-// 怎么让表单宽度缩小点
 //表单里，点击确定x和取消按钮都没反应，不应该是dialogVisible=false吗？？？？
 //详情的按钮根本点不了，但是编辑可以点
 //表单验证的功能失效？？
-//分页怎么不显示数字
+//分页怎么不显示数字 可能是没有向后端请求数据的原因
 <template>
   <div class="Equipmentcontainer" :style="{left: left}">
     <div class="layoutEquipment">
@@ -37,7 +36,8 @@
       <el-table-column prop="quantity" label="数量" width='150' sortable></el-table-column> 
       <el-table-column label="操作" width="200">
       <template slot-scope="scope">
-        <el-button @click="Detail(scope.row)" type="text" size="small">详情</el-button>
+        <!-- @click="Detail(scope.row)"  -->
+        <el-button @click="dialogFormVisible2 = true" type="text" size="small">详情</el-button>
         <el-button @click="Edit(scope.row)" type="text" size="small">修改</el-button>
         <el-button @click="Delete(scope.row)" type="text" size="small">删除</el-button>
       </template>
@@ -46,7 +46,7 @@
       <!-- 表格结束 -->
 
       <!-- 表单开始 -->
-      <el-dialog :title="title" :visible.sync="dialogFormVisible" custom-class="customWidth">
+      <el-dialog :title="title" :visible.sync="dialogFormVisible" custom-class="customWidth" width="35%" @close='closeDialog'>
         <el-form :model="form" :rules='rule' ref="Form">
           <!-- form -->
           <el-form-item label="编号" prop="equipNumber" :label-width="formLabelWidth">
@@ -78,6 +78,26 @@
       </el-dialog>
       <!-- 表单结束 -->
 
+      <!-- 表单开始 -->
+      <el-dialog title="设备详情" :visible.sync="dialogFormVisible2">
+        <el-form :model="form2">
+          <el-form-item label="活动名称" :label-width="formLabelWidth2">
+            <el-input v-model="form2.name" autocomplete="off"></el-input>
+          </el-form-item>
+          <el-form-item label="活动区域" :label-width="formLabelWidth2">
+            <el-select v-model="form2.region" placeholder="请选择活动区域">
+              <el-option label="区域一" value="shanghai"></el-option>
+              <el-option label="区域二" value="beijing"></el-option>
+            </el-select>
+          </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+          <el-button @click="dialogFormVisible2 = false">取 消</el-button>
+          <el-button type="primary" @click="dialogFormVisible2 = false">确 定</el-button>
+        </div>
+      </el-dialog>
+      <!-- 表单结束 -->
+
       <!-- 分页开始 -->
       <div class="page" style="position: absolute; bottom: 40px;right: 20px;">
         <el-pagination
@@ -90,7 +110,7 @@
           >
         </el-pagination>
       </div>
-		<!-- 分页结束 -->
+      <!-- 分页结束 -->
     </div>
   </div>
 </template>
@@ -123,32 +143,49 @@ export default {
         factory:'',
         quantity:''
       },
-      formLabelWidth:'200px',
-      id:'',
-      idDis:false,
-      rules: {
-        equipNumber:[{required:true,message:'编号不能为空'}],
-        equipName:[{required:true,message:'名称不能为空'}],
-        type:[{required:true,message:'型号不能为空'}],
-        size:[{required:true,message:'规格不能为空'}],
-        factory:[{required:true,message:'厂家不能为空'}],
-        quantity:[{required:true,message:'数量不能为空'}],
-      },
+      formLabelWidth:'80px',
+      // id:'',
+      // idDis:false,
+      // rules: {
+      //   equipNumber:[{required:true,message:'编号不能为空'}],
+      //   equipName:[{required:true,message:'名称不能为空'}],
+      //   type:[{required:true,message:'型号不能为空'}],
+      //   size:[{required:true,message:'规格不能为空'}],
+      //   factory:[{required:true,message:'厂家不能为空'}],
+      //   quantity:[{required:true,message:'数量不能为空'}],
+      // },
 
-      //和分页相关的变量
+      //模态框相关变量
+      dialogFormVisible2: false,
+      form2: {
+        name: '',
+        region: '',
+        date1: '',
+        date2: '',
+        delivery: false,
+        type: [],
+        resource: '',
+        desc: ''
+      },
+      formLabelWidth2: '120px',
+
+      //和分页相关的变量 
       total:undefined,  // 总页数
       pageSize:5,
       currentPage:1,
       currentPageData:[], //当前页显示内容
+      equipNumber:'',
+      equipName:'',
     }
   },
   created(){
-      this.GetAllData();
+    //向后台请求数据
+    this.GetAllData();
   },
   methods: {
-    handleCurrentChange(){
-      this.GetAllData();
-    },
+    // handleCurrentChange(val){
+    //   this.GetAllData();
+    // },
     Search(){
 
     },
@@ -160,16 +197,19 @@ export default {
     GetAllData(){
 
     },
+    closeDialog(){
+      this.dialogFormVisible=false;
+    },
     Add(){
       this.title='新增设备';
       this.dialogFormVisible=true;
       this.form={};
       this.idDis=false;
     },
-    Detail(row){
+    Detail(){
       this.title='设备详情';
-      this.diglogFormVisible=true;
-      this.form=row;
+      this.diglogFormVisible2=true;
+      // this.form=row;
       this.idDis=true;
     },
     Edit(row){
@@ -180,14 +220,16 @@ export default {
     },
     //确认新增的按钮
     BtnOk(formName){
-      this.$refs[formName].validate((valid) => {
-        if(valid){
+      this.dialogFormVisible=false;
+      console.log(formName);
+      // this.$refs[formName].validate((valid) => {
+      //   if(valid){
 
-          this.dialogFormVisible=false;
-        }else{
-          console.log('失败')
-        }         
-    })
+      //     this.dialogFormVisible=false;
+      //   }else{
+      //     console.log('失败')
+      //   }         
+      // })
     },
     //删除
     Delete(){
