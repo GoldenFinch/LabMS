@@ -14,7 +14,7 @@
             <el-table-column prop="testname" label="实验名称" width="200" sortable> </el-table-column>
             <el-table-column prop="time" label="实验时间" width="200" sortable> </el-table-column>
             <el-table-column prop="status" label="录入状态" width="150" sortable> </el-table-column>
-            <el-table-column label="操作" width="300">
+            <el-table-column label="操作" width="150">
             <template slot-scope="scope">
               <el-button v-if="scope.row.status==='未录入'" @click="Record(scope.row)" 
               type="primary" icon="el-icon-edit" size="small">录入</el-button>
