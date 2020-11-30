@@ -13,6 +13,7 @@ import Orderlab from '@/components/Orderlab'
 import Myorder from '@/components/Myorder'
 import Equipment from '@/components/Equipment'
 import Material from '@/components/Material'
+import Purchase from '@/components/Purchase'
 
 Vue.use(Router)
 
@@ -71,6 +72,10 @@ export default new Router({
                         {
                             path: 'material',
                             component: Material
+                        },
+                        {
+                            path: 'purchase',
+                            component: Purchase
                         }
                     ]
                 }

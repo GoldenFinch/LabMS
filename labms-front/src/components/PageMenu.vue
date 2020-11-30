@@ -61,14 +61,24 @@ export default {
         if (this.$router.path!=='/menu/material'){
           this.$router.push('/menu/material')
         }
+      }else if (key==='4'){
+        if (this.$router.path!=='/menu/purchase'){
+          this.$router.push('/menu/purchase')
+        }
       }
     }
   },
   mounted () {
     if (this.$route.path === '/menu/teach') {
       this.activeIndex = '0'
-    } else if (this.$route.path === '/menu/') {
+    } else if (this.$route.path === '/menu/order') {
       this.activeIndex = '1'
+    }else if (this.$router.path ==='/menu/equipment'){
+      this.activeIndex = '2'
+    }else if (this.$router.path ==='/menu/material'){
+      this.activeIndex='3'
+    }else if(this.$router.path ==='/menu/purchase'){
+      this.activeIndex='4'
     }
   }
 }
