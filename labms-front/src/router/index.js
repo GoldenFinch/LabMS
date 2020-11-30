@@ -7,6 +7,7 @@ import PageMenu from '@/components/PageMenu'
 import Teach from '@/components/Teach'
 import Order from '@/components/Order'
 import Equipment from '@/components/Equipment'
+import Material from '@/components/Material'
 
 Vue.use(Router)
 
@@ -38,6 +39,10 @@ export default new Router({
                         {
                             path:'equipment',
                             component:Equipment
+                        },
+                        {
+                            path: 'material',
+                            component: Material
                         }
                     ]
                 }

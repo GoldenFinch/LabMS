@@ -57,6 +57,10 @@ export default {
         if(this.$route.path!=='/menu/equipment'){
           this.$router.push('/menu/equipment')
         }
+      }else if (key==='3'){
+        if (this.$router.path!=='/menu/material'){
+          this.$router.push('/menu/material')
+        }
       }
     }
   },
