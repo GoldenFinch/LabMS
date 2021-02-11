@@ -17,8 +17,8 @@
       <el-menu-item index="1"><i class="el-icon-s-home" style="color: #b69779;padding-bottom: 4px;"></i>主页</el-menu-item>
       <el-menu-item index="2"><i class="el-icon-s-grid" style="color: #b69779;padding-bottom: 4px;"></i>菜单</el-menu-item>
       <div id="menuuser">
-        <router-link to="/login" v-if="cookiesname" style="color:#b69779">登录</router-link>
-        <p v-if="!cookiesname" style="color: #b69779;cursor: pointer" @click="signout()">欢迎您,{{this.$cookies.get('private').name}},点击退出</p>
+        <router-link to="/login" v-if="this.$root.USER == null" style="color:#b69779">登录</router-link>
+        <p v-if="this.$root.USER!=null" style="color: #b69779;cursor: pointer" @click="signout()">欢迎您,{{this.$root.USER.Name}},点击退出</p>
       </div>
     </el-menu>
     <div class="content">
@@ -28,11 +28,12 @@
 </template>
 
 <script>
+import Login from "@/components/Login";
+
 export default {
   name: 'Main',
   data () {
     return {
-      cookiesname: true,
       activeIndex: '1',
       isCollapse: true,
       left: '50px'
@@ -67,10 +68,9 @@ export default {
       }
     },
     signout () {
-      this.$cookies.remove('private')
-      this.$cookies.remove('token')
-      this.cookiesname = true
-      this.$router.go(0)
+      this.axios.get('/api/logout').then(res =>{
+        console.log(res)
+      })
     }
   },
   mounted () {
@@ -80,9 +80,6 @@ export default {
       this.activeIndex = '2'
       document.getElementById('menustretch').style.display = 'flex'
       document.getElementById('logo').style.width = '50px'
-    }
-    if (this.$cookies.get('private') !== null) {
-      this.cookiesname = false
     }
   }
 }

@@ -148,7 +148,7 @@ export default {
         Mode: '1',
         input_name: '',
             MyData:[
-                {num:0,name:'20%硫酸10ml',factory:'哈药集团有限公司',quantity:2},
+                {num:0,name:'20%硫酸10ml',factory:'哈药集团有限公司\n',quantity:2},
                 {num:1,name:'酚酞试液',factory: '哈药集团有限公司',quantity: 2},
                 {num:2,name: '盐酸',factory: '哈药集团有限公司',quantity: 2},
                 {num:3,name:'硫酸钠',factory: '哈药集团有限公司',quantity: 2}

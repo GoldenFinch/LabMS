@@ -17,7 +17,7 @@
               <img class="image" src="../assets/username.png">
             </Col>
             <Col span="22">
-              <input class="inp" type="text" v-model="loginForm.loginusername" placeholder="  用户名"></input>
+              <input class="inp" type="text" v-model="loginForm.username" placeholder="  用户名"></input>
             </Col>
           </Row>
         </Form-item>
@@ -27,12 +27,12 @@
               <img class="image" src="../assets/password.png">
             </Col>
             <Col span="22">
-              <input class="inp" type="password" v-model="loginForm.loginpassword" placeholder="  密码"></input>
+              <input class="inp" type="password" v-model="loginForm.password" placeholder="  密码"></input>
             </Col>
           </Row>
         </Form-item>
         <FormItem>
-          <Button class="loginbutton" type="primary" @click="loginSubmit('loginForm')">登录</Button>
+          <Button class="loginbutton" type="primary" @click="loginSubmit()">登录</Button>
         </FormItem>
       </Form>
       <h4 style="margin: 10px; font-weight: lighter;font-size: 12px">欢迎登录！</h4>
@@ -41,56 +41,59 @@
     <div class="registerbox" id="registerbox">
       <h4 style="font-weight: lighter;font-size: 17px; margin-bottom: 0px">注册</h4>
       <div>
-        <a style="font-size: 10px;font-weight: lighter;#39f: white;margin-right: 50%; margin-bottom: 10px">*请输入7~10位数字和字母作为用户名和密码</a>
+        <a style="font-size: 10px;font-weight: lighter;#39f: white;margin-right: 50%; margin-bottom: 10px">*请输入7~12位数字和字母作为用户名和密码</a>
       </div>
       <Form rel="registerForm" :model="registerForm" inline>
-        <FormItem prop="registerusername">
+        <FormItem prop="username">
           <Row>
             <Col span="2">
               <img class="image" src="../assets/username.png">
             </Col>
             <Col span="22">
-              <input class="inp" type="text" v-model="registerForm.registerusername" placeholder="  用户名"></input>
+              <input class="inp" type="text" v-model="registerForm.username" placeholder="  用户名"></input>
             </Col>
           </Row>
         </FormItem>
-        <FormItem prop="registerpassword">
+        <FormItem prop="password">
           <Row>
             <Col span="2">
               <img class="image" src="../assets/password.png">
             </Col>
             <Col span="22">
-              <input class="inp" :type='passwordtype' v-model="registerForm.registerpassword" placeholder="  密码"></input>
-            </Col>
-          </Row>
-        </FormItem>
-        <FormItem prop="registeremail">
-          <Row>
-            <Col span="2">
-              <img class="image" src="../assets/email.png">
-            </Col>
-            <Col span="22">
-              <input class="inp" type="text" v-model="registerForm.registeremail" placeholder="  邮箱"></input>
-            </Col>
-          </Row>
-        </FormItem>
-        <FormItem prop="registerkey">
-          <Row>
-            <Col span="2">
-              <img class="image" src="../assets/key.png">
-            </Col>
-            <Col span="22">
-              <input class="inp" type="text" v-model="registerForm.registerkey" placeholder="  验证码"></input>
+              <input class="inp" :type='passwordtype' v-model="registerForm.password" placeholder="  密码"></input>
             </Col>
           </Row>
         </FormItem>
         <FormItem>
-          <Button id="registerbutton" type="primary" @click="registerSubmit('registerForm')" style="background-color: transparent;color: #39f;">注册</Button>
+          身份：
+          <Dropdown trigger="click" style="width: 100px;">
+            <a>
+              {{registerForm.identity}}
+              <Icon type="ios-arrow-down"></Icon>
+            </a>
+            <DropdownMenu slot="list">
+              <DropdownItem @click.native="selectLevel('管理员')">管理员</DropdownItem>
+              <DropdownItem @click.native="selectLevel('老师')">老师</DropdownItem>
+              <DropdownItem @click.native="selectLevel('学生')">学生</DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+        </FormItem>
+        <FormItem prop="name">
+          <Row>
+            <Col span="2">
+              <img class="image" src="../assets/username.png">
+            </Col>
+            <Col span="22">
+              <input class="inp" type="text" v-model="registerForm.name" placeholder="  您的真实姓名"></input>
+            </Col>
+          </Row>
+        </FormItem>
+        <FormItem>
+          <Button id="registerbutton" type="primary" @click="registerSubmit()" style="background-color: transparent;color: #39f;">注册</Button>
         </FormItem>
       </Form>
       <div>
         <Button type="primary" @click="showregisterpassword()" v-text='buttontext' style="background-color: transparent;width: 75px;height:23px;color:#39f;padding: 0;margin: 0;">显示密码</Button>
-        <Button id="getcheckbutton" type="primary" @click="getcheckcode()" style="background-color: transparent;width: 75px;height:23px;color:#39f;padding: 0;margin: 0;">获取验证码</Button>
       </div>
       <div @click="hideregisterbox()" style="cursor: pointer;">
         <img src="../assets/up.png" style="position: absolute;bottom: 0;padding: 0;left:49.5%;height: 20px;width: 30px;">
@@ -152,24 +155,24 @@
         mouseX: -1,
         mouseY: -1,
         loginForm: {    //表单字段
-          loginusername: '',
-          loginpassword: ''
+          username: '',
+          password: ''
         },
         loginRules: {   //表单字段限制规则
-          loginusername: [
+          username: [
             { required: true, message: '请填写用户名', trigger: 'blur' }
           ],
-          loginpassword: [
+          password: [
             { required: true, message: '请填写密码', trigger: 'blur' },
             { type: 'string', min: 6, message: '密码长度不能小于6位', trigger: 'blur' }
           ]
         },
 
         registerForm: {
-          registerusername: '',
-          registerpassword: '',
-          registeremail: '',
-          registerkey: '',
+          username: '',
+          password: '',
+          identity: '选择身份',
+          name: ''
         },
         passwordtype: "password",
         buttontext: "显示密码",
@@ -179,24 +182,20 @@
     methods: {
       //提交登录表
       loginSubmit(name) {
-        var reg= /^[0-9a-zA-Z]{7,10}$/;
-        if((reg.test(this.loginForm.loginusername)===false)||(reg.test(this.loginForm.loginpassword)===false)){
+        var reg= /^[0-9a-zA-Z]{7,12}$/;
+        if((reg.test(this.loginForm.username)===false)||(reg.test(this.loginForm.password)===false)){
           this.$Notice.error({
             title: '格式不正确!',
           })
         }else{
-          var formData=new FormData();
-          formData.append("username",this.loginForm.loginusername);
-          formData.append("password",this.loginForm.loginpassword);
-          this.axios.post("/api/login",formData).then(res => {
-            if(res.data===0){
+          this.axios.post("/api/login",this.loginForm).then(res => {
+            if(res.data.code===1){
               this.$Notice.error({
-                title: '密码错误!',
+                title: res.data.msg,
               })
-            }else if(res.data===1){
-              //set cookies
-              this.$cookies.set("username",this.loginForm.loginusername,60*60*24);
-              this.$cookies.set("password",this.loginForm.loginpassword,60*60*24);
+            }else if(res.data.code===0){
+              this.$root.USER = res.data.data
+              //console.log(this.$user)
               this.$Notice.success({
                 title: '登录成功!',
               });
@@ -205,24 +204,17 @@
               if(from!==undefined){
                 this.$router.push('/'+this.$route.query.from)
               }else{
-                this.$router.push('/main');
-
+                this.$router.push('/home');
               }
-            }else if (res.data===2){
-              this.$Notice.error({
-                title: '用户不存在!',
-              })
             }
           })
         }
       },
       //提交注册表
-      registerSubmit(name) {
-        var emailcheck=/^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
-        var reg= /^[0-9a-zA-Z]{7,10}$/;
-        var keycheck= /^[0-9]{4}$/;
+      registerSubmit() {
+        var reg= /^[0-9a-zA-Z]{7,12}$/;
         //字段验证
-        if((this.registerForm.registeremail==='')||(emailcheck.test(this.registerForm.registeremail)===false)||(reg.test(this.registerForm.registerusername)===false)||(reg.test(this.registerForm.registerpassword)===false)||(keycheck.test(this.registerForm.registerkey)===false)){
+        if((reg.test(this.registerForm.username)===false)||(reg.test(this.registerForm.password)===false)||(this.registerForm.name=="")||(this.registerForm.identity=="选择身份")){
           this.$Notice.error({
             title: '格式不正确!',
           })
@@ -230,68 +222,19 @@
           this.$Notice.open({
             title: '已提交，稍等，请勿重复注册!',
           });
-          document.getElementById("registerbutton").disabled=true;
-          var formData=new FormData();
-          formData.append("username",this.registerForm.registerusername);
-          formData.append("password",this.registerForm.registerpassword);
-          formData.append("email",this.registerForm.registeremail);
-          formData.append("keycode",Number(this.registerForm.registerkey));
-          formData.append("level",0);//用户等级,默认为0
-          this.axios.post("/api/register",formData).then(res =>{
-            if (res.data===1){
+          //document.getElementById("registerbutton").disabled=true;
+          this.axios.post("/api/register",this.registerForm).then(res =>{
+            if (res.data.code===0){
               this.$Notice.success({
                 title: '注册成功!',
               });
-            }else if(res.data===0){
+            }else if(res.data.code===1){
               this.$Notice.error({
-                title: '注册失败,请重试!',
-              })
-              document.getElementById("registerbutton").disabled=false;
-            }else if(res.data===2){
-              this.$Notice.error({
-                title: '用户名已存在!',
-              })
-              document.getElementById("registerbutton").disabled=false;
-            }else if(res.data===3){
-              this.$Notice.error({
-                title: '验证码错误!',
-              })
-              document.getElementById("registerbutton").disabled=false;
-            }else if (res.data===4){
-              this.$Notice.error({
-                title: '未获取验证码!',
+                title: res.data.msg,
               })
               document.getElementById("registerbutton").disabled=false;
             }
           })
-        }
-      },
-      //获取验证码
-      getcheckcode(){
-        var emailcheck=/^\w{3,}(\.\w+)*@[A-z0-9]+(\.[A-z]{2,5}){1,2}$/;
-        if((this.registerForm.registeremail==='')||(emailcheck.test(this.registerForm.registeremail)===false)){
-          this.$Notice.info({
-            title: '请输入合法邮箱!',
-          });
-        }else{
-          this.$Notice.info({
-            title: '已获取，稍等，请勿重复获取!',
-          });
-          document.getElementById("getcheckbutton").disabled=true;
-          var formData=new FormData();
-          formData.append("email",this.registerForm.registeremail);
-          this.axios.post("/api/mail",formData).then(res => {
-            if(res.data===1){
-              this.$Notice.success({
-                title: '获取成功!',
-              });
-            }else{
-              this.$Notice.error({
-                title: '获取失败!',
-              })
-              document.getElementById("getcheckbutton").disabled=false;
-            }
-          });
         }
       },
       //显示注册表
@@ -312,6 +255,10 @@
           this.buttontext="显示密码";
           this.passwordhide=true;
         }
+      },
+      //选择身份
+      selectLevel(name){
+        this.registerForm.identity = name
       },
       mousemove(e){
         if ((this.mouseX===-1)&&(this.mouseY===-1)){
