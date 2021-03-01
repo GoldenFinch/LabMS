@@ -2,17 +2,11 @@
   <div class="OfferCoursescontainer" :style="{left: left}">
     <div class="layoutOfferCourses">
       <el-form ref="form" :rules="rules" :model="form" label-width="80px">
-        <el-form-item label="课程编号" prop="id">
+        <el-form-item label="实验室id" prop="id">
             <el-input v-model="form.id" style="width:200px"></el-input>
         </el-form-item>
         <el-form-item label="课程名称" prop="name">
             <el-input v-model="form.name" style="width:200px"></el-input>
-        </el-form-item>
-        <el-form-item label="实验地点" prop="region">
-            <el-select v-model="form.region" placeholder="请选择实验室">
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-            </el-select>
         </el-form-item>
         <el-form-item label="实验时间" required>
             <el-col :span="11">
@@ -32,10 +26,10 @@
         </el-form-item>
         <el-form-item label="实验性质" prop="type">
             <el-checkbox-group v-model="form.type">
-            <el-checkbox label="授课教学" name="type"></el-checkbox>
-            <el-checkbox label="自主探究" name="type"></el-checkbox>
-            <el-checkbox label="小组实验" name="type"></el-checkbox>
-            <el-checkbox label="独自实验" name="type"></el-checkbox>
+            <el-checkbox label="授课教学" name="type" value="0"></el-checkbox>
+            <el-checkbox label="自主探究" name="type" value="1"></el-checkbox>
+            <el-checkbox label="小组实验" name="type" value="2"></el-checkbox>
+            <el-checkbox label="独自实验" name="type" value="3"></el-checkbox>
             </el-checkbox-group>
         </el-form-item>
         <el-form-item label="实验资源" prop="resource">
@@ -65,7 +59,6 @@ export default {
      form: {
         id:'',
         name: '',
-        region: '',
         date1: '',
         date2: '',
         openpc: false,
@@ -75,14 +68,11 @@ export default {
         },
         rules: {
           id:[
-              {required: true, message: '请输入课程编号', trigger: 'blur'}
+              {required: true, message: '请输入实验室编号', trigger: 'blur'}
           ],
           name: [
             { required: true, message: '请输入课程名称', trigger: 'blur' },
             { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-          ],
-          region: [
-            { required: true, message: '请选择实验地点', trigger: 'change' }
           ],
           date1: [
             { type: 'date', required: true, message: '请选择日期', trigger: 'change' }

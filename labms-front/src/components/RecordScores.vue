@@ -13,10 +13,15 @@
             <el-table-column prop="courseid" label="课程编号" width="150" sortable> </el-table-column>
             <el-table-column prop="testname" label="实验名称" width="200" sortable> </el-table-column>
             <el-table-column prop="time" label="实验时间" width="200" sortable> </el-table-column>
-            <el-table-column prop="status" label="录入状态" width="150" sortable> </el-table-column>
+            <el-table-column prop="score" label="成绩" width="150" sortable>
+              <template slot-scope="scope">
+                {{scope.row.score==='-1'?"未录入":scope.row.score}}
+              </template>
+            </el-table-column>
+            </el-table-column>
             <el-table-column label="操作" width="150">
             <template slot-scope="scope">
-              <el-button v-if="scope.row.status==='未录入'" @click="Record(scope.row)" 
+              <el-button v-if="scope.row.score==='-1'" @click="Record(scope.row)" 
               type="primary" icon="el-icon-edit" size="small">录入</el-button>
               <el-button v-else @click="Edit(scope.row)" type="success" icon="el-icon-check" size="small">修改</el-button>
             </template>
@@ -53,35 +58,35 @@ export default {
           courseid:'A101',
           testname:'迈克尔逊干涉仪',
           time:'2020-11-30',
-          status:'已录入'
+          score:'99'
       },{
           stuid:'0905170423',
           stuname:'Bob',
           courseid:'A101',
           testname:'迈克尔逊干涉仪',
           time:'2020-11-30',
-          status:'已录入'
+          score:'88'
       },{
           stuid:'0905170424',
           stuname:'Cindy',
           courseid:'A101',
           testname:'迈克尔逊干涉仪',
           time:'2020-11-30',
-          status:'未录入'
+          score:'-1'
       },{
           stuid:'0905170425',
           stuname:'David',
           courseid:'A101',
           testname:'迈克尔逊干涉仪',
           time:'2020-11-30',
-          status:'未录入'
+          score:'-1'
       },{
           stuid:'0905170426',
           stuname:'Eve',
           courseid:'A101',
           testname:'迈克尔逊干涉仪',
           time:'2020-11-30',
-          status:'未录入'
+          score:'-1'
       }],
 
       //和分页相关的变量 

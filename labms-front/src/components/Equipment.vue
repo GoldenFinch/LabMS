@@ -36,7 +36,6 @@
       <el-table-column label="操作" width="200">
       <template slot-scope="scope">
         <!-- @click="Detail(scope.row)"  -->
-        <el-button @click="dialogFormVisible2 = true" type="text" size="small">详情</el-button>
         <el-button @click="Edit(scope.row)" type="text" size="small">修改</el-button>
         <el-button @click="Delete(scope.row)" type="text" size="small">删除</el-button>
       </template>
